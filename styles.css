@@ -717,3 +717,57 @@ select:focus-visible {
 .resources-cta h3 { font-size:1.35rem; margin-bottom:8px; }
 .resources-cta p { color:var(--text-secondary); margin:0; max-width:700px; }
 @media (max-width:768px) { .resources-cta { flex-direction:column; align-items:flex-start; } .resources-cta .btn { width:100%; } }
+
+
+/* Subtle visual polish and entrance animations */
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    animation: fade-up 0.7s ease-out both;
+}
+
+.services-grid .service-card,
+.contact-card,
+.tool-card {
+    animation: fade-up 0.6s ease-out both;
+}
+
+.services-grid .service-card:nth-child(2) { animation-delay: 0.08s; }
+.services-grid .service-card:nth-child(3) { animation-delay: 0.16s; }
+.services-grid .service-card:nth-child(4) { animation-delay: 0.24s; }
+
+.service-card:hover,
+.tool-card:hover {
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-card:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.tool-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.cta-section .cta-content {
+    animation: fade-up 0.6s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-content,
+    .services-grid .service-card,
+    .contact-card,
+    .tool-card,
+    .cta-section .cta-content {
+        animation: none;
+    }
+}
