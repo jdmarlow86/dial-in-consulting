@@ -629,3 +629,13 @@ a:hover {
         padding: 60px 0;
     }
 }
+
+
+/* Calendly embedded scheduler */
+.calendly-inline-widget {
+    width: 100%;
+    min-width: 320px;
+    height: 700px;
+    overflow: hidden;
+    border-radius: 12px;
+}
