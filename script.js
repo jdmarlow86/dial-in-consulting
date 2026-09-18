@@ -100,10 +100,10 @@ This request was submitted via the Dial in Consulting website.
                 throw new Error('Form submission failed');
             }
         } catch (error) {
-            window.location.href = `mailto:jonmarlow@gmail.com?subject=Appointment Request from ${data.name}&body=${encodeURIComponent(emailBody)}`;
+            window.location.href = `mailto:dial.in.consulting@gmail.com?subject=Appointment Request from ${data.name}&body=${encodeURIComponent(emailBody)}`;
             showModal(
                 'Opening Email Client',
-                'We\'re opening your email client to send your appointment request directly to jonmarlow@gmail.com.'
+                'We\'re opening your email client to send your appointment request directly to dial.in.consulting@gmail.com.'
             );
             scheduleForm.reset();
         }
@@ -152,10 +152,10 @@ This message was sent via the Dial in Consulting website.
                 throw new Error('Form submission failed');
             }
         } catch (error) {
-            window.location.href = `mailto:jonmarlow@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(emailBody)}`;
+            window.location.href = `mailto:dial.in.consulting@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(emailBody)}`;
             showModal(
                 'Opening Email Client',
-                'We\'re opening your email client to send your message directly to jonmarlow@gmail.com.'
+                'We\'re opening your email client to send your message directly to dial.in.consulting@gmail.com.'
             );
             contactForm.reset();
         }
