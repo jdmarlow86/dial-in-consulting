@@ -9,12 +9,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalMessage = document.getElementById('modalMessage');
 
     mobileMenuBtn.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
+        const isOpen = navLinks.classList.toggle('active');
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+        mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     });
 
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.setAttribute('aria-label', 'Open navigation menu');
         });
     });
 
