@@ -1,20 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
-    const scheduleForm = document.getElementById('scheduleForm');
     const contactForm = document.getElementById('contactForm');
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     const modal = document.getElementById('successModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalMessage = document.getElementById('modalMessage');
-    const scheduleDateInput = document.getElementById('schedule-date');
-
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const minDate = tomorrow.toISOString().split('T')[0];
-    scheduleDateInput.min = minDate;
 
     mobileMenuBtn.addEventListener('click', function() {
         navLinks.classList.toggle('active');
@@ -54,58 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeModal();
-        }
-    });
-
-    scheduleForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(scheduleForm);
-        const data = Object.fromEntries(formData);
-
-        const emailBody = `
-New Appointment Request
-
-Name: ${data.name}
-Email: ${data.email}
-Company: ${data.company || 'Not provided'}
-Preferred Date: ${data.date}
-Preferred Time: ${data.time}
-Message: ${data.message || 'No message provided'}
-
----
-This request was submitted via the Dial in Consulting website.
-        `.trim();
-
-        try {
-            const response = await fetch('https://formspree.io/f/xqapdbpd', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: data.email,
-                    subject: `Appointment Request from ${data.name}`,
-                    message: emailBody
-                })
-            });
-
-            if (response.ok) {
-                showModal(
-                    'Request Submitted!',
-                    `Thank you, ${data.name}! We've received your appointment request for ${data.date} at ${data.time}. We'll confirm your appointment via email within 24 hours.`
-                );
-                scheduleForm.reset();
-            } else {
-                throw new Error('Form submission failed');
-            }
-        } catch (error) {
-            window.location.href = `mailto:dial.in.consulting@gmail.com?subject=Appointment Request from ${data.name}&body=${encodeURIComponent(emailBody)}`;
-            showModal(
-                'Opening Email Client',
-                'We\'re opening your email client to send your appointment request directly to dial.in.consulting@gmail.com.'
-            );
-            scheduleForm.reset();
         }
     });
 
