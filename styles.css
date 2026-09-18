@@ -710,3 +710,10 @@ select:focus-visible {
         scroll-behavior: auto !important;
     }
 }
+
+
+/* Resources lead-generation CTA */
+.resources-cta { display:flex; align-items:center; justify-content:space-between; gap:32px; margin-top:48px; padding:32px; background-color:var(--bg-card); border:1px solid var(--border); border-radius:12px; }
+.resources-cta h3 { font-size:1.35rem; margin-bottom:8px; }
+.resources-cta p { color:var(--text-secondary); margin:0; max-width:700px; }
+@media (max-width:768px) { .resources-cta { flex-direction:column; align-items:flex-start; } .resources-cta .btn { width:100%; } }
