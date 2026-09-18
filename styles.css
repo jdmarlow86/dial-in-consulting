@@ -639,3 +639,43 @@ a:hover {
     overflow: hidden;
     border-radius: 12px;
 }
+
+
+/* Conversion-focused CTA sections */
+.cta-section {
+    padding: 56px 0;
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.cta-content p {
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 650px;
+}
+
+@media (max-width: 768px) {
+    .cta-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cta-content .btn {
+        width: 100%;
+    }
+}
