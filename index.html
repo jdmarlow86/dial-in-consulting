@@ -77,44 +77,10 @@
             <h2 class="section-title">Schedule a Consultation</h2>
             <p class="section-subtitle">Select a time that works for you and let's discuss how we can help your business grow.</p>
             <div class="schedule-form-container">
-                <form id="scheduleForm" class="form">
-                    <div class="form-group">
-                        <label for="schedule-name">Full Name *</label>
-                        <input type="text" id="schedule-name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="schedule-email">Email Address *</label>
-                        <input type="email" id="schedule-email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="schedule-company">Company Name</label>
-                        <input type="text" id="schedule-company" name="company">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="schedule-date">Preferred Date *</label>
-                            <input type="date" id="schedule-date" name="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="schedule-time">Preferred Time *</label>
-                            <select id="schedule-time" name="time" required>
-                                <option value="">Select a time</option>
-                                <option value="9:00 AM">9:00 AM</option>
-                                <option value="10:00 AM">10:00 AM</option>
-                                <option value="11:00 AM">11:00 AM</option>
-                                <option value="1:00 PM">1:00 PM</option>
-                                <option value="2:00 PM">2:00 PM</option>
-                                <option value="3:00 PM">3:00 PM</option>
-                                <option value="4:00 PM">4:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="schedule-message">Brief Description of Your Needs</label>
-                        <textarea id="schedule-message" name="message" rows="4" placeholder="Tell us about your project or challenges..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Request Appointment</button>
-                </form>
+                <div class="calendly-inline-widget" data-url="https://calendly.com/jonmarlow" style="min-width:320px;height:700px;"></div>
+                <noscript>
+                    <p>JavaScript is required to use the embedded scheduler. <a href="https://calendly.com/jonmarlow" target="_blank" rel="noopener noreferrer">Open the Dial in Consulting scheduling page</a>.</p>
+                </noscript>
                 <div class="schedule-info">
                     <h3>What to Expect</h3>
                     <ul class="info-list">
@@ -384,5 +350,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
