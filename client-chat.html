@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dial in Consulting client chat">
+  <title>Client Chat | Dial in Consulting</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="client-chat.css">
+</head>
+<body class="chat-page">
+  <header class="chat-header">
+    <a href="./" class="chat-brand">Dial in Consulting</a>
+    <span class="chat-status">Client Chat</span>
+  </header>
+
+  <main class="chat-shell">
+    <aside class="chat-sidebar">
+      <div class="sidebar-title">Messages</div>
+      <button class="conversation active" type="button">
+        <span class="avatar">DI</span>
+        <span class="conversation-copy">
+          <strong>Dial in Consulting</strong>
+          <small>Start a conversation</small>
+        </span>
+      </button>
+    </aside>
+
+    <section class="chat-panel" aria-label="Client conversation">
+      <div class="chat-panel-header">
+        <div>
+          <h1>Dial in Consulting</h1>
+          <p>Private client conversation</p>
+        </div>
+        <span class="online-dot" title="Online"></span>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="empty-chat" id="emptyChat">
+          <div class="empty-icon">💬</div>
+          <h2>Start your conversation</h2>
+          <p>Send a message to Dial in Consulting.</p>
+        </div>
+      </div>
+
+      <form class="chat-composer" id="chatForm">
+        <textarea id="messageInput" rows="1" maxlength="2000" placeholder="Type a message…" aria-label="Message"></textarea>
+        <button class="send-btn" type="submit" aria-label="Send message">➤</button>
+      </form>
+      <p class="chat-note">Messages are available after the chat backend is connected.</p>
+    </section>
+  </main>
+
+  <script src="client-chat.js"></script>
+</body>
+</html>
