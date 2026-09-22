@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dial in Consulting client messaging portal.">
+<title>Client Portal | Dial in Consulting</title>
+<link rel="stylesheet" href="client-chat.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><a href="index.html">Dial in Consulting</a><span>Client Portal</span></div>
+    <div class="customer">
+      <div class="avatar">AC</div>
+      <div><strong>Acme Consulting</strong><small>Client account</small></div>
+    </div>
+    <nav>
+      <button class="side-item active" type="button"><span>💬</span> Messages</button>
+    </nav>
+    <a class="back-link" href="index.html">← Back to website</a>
+  </aside>
+  <main class="chat">
+    <header class="chat-header">
+      <div>
+        <h1>Jonathan</h1>
+        <p><span class="status-dot"></span> Dial in Consulting</p>
+      </div>
+      <button class="menu-btn" aria-label="More options">•••</button>
+    </header>
+    <section class="messages" id="messages" aria-live="polite">
+      <div class="day">Today</div>
+      <div class="message theirs"><div class="bubble"><strong>Jonathan</strong><p>Hi! Welcome to the Dial in Consulting client portal. This is where we can keep project conversations in one place.</p><time>10:14 AM</time></div></div>
+      <div class="message mine"><div class="bubble"><p>Thanks! This looks great.</p><time>10:16 AM</time></div></div>
+    </section>
+    <form class="composer" id="chatForm">
+      <textarea id="messageInput" rows="1" placeholder="Type a message..." aria-label="Message"></textarea>
+      <button type="submit" aria-label="Send message">➤</button>
+    </form>
+  </main>
+</div>
+<script src="client-chat.js"></script>
+</body>
+</html>
