@@ -5,38 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Dial in Consulting client messaging portal.">
 <title>Client Portal | Dial in Consulting</title>
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="client-chat.css">
 </head>
-<body>
-<div class="app-shell">
-  <aside class="sidebar">
-    <div class="brand"><a href="index.html">Dial in Consulting</a><span>Client Portal</span></div>
-    <div class="customer">
-      <div class="avatar">AC</div>
-      <div><strong>Acme Consulting</strong><small>Client account</small></div>
-    </div>
-    <nav>
-      <button class="side-item active" type="button"><span>💬</span> Messages</button>
-    </nav>
-    <a class="back-link" href="index.html">← Back to website</a>
+<body class="chat-page">
+<header class="chat-header">
+  <a class="chat-brand" href="index.html">Dial in Consulting</a>
+  <span class="chat-status">Client Portal</span>
+</header>
+<div class="chat-shell">
+  <aside class="chat-sidebar">
+    <div class="sidebar-title">Conversations</div>
+    <button class="conversation active" type="button">
+      <span class="avatar">AC</span>
+      <span class="conversation-copy"><strong>Acme Consulting</strong><small>Private customer chat</small></span>
+    </button>
   </aside>
-  <main class="chat">
-    <header class="chat-header">
-      <div>
-        <h1>Jonathan</h1>
-        <p><span class="status-dot"></span> Dial in Consulting</p>
-      </div>
-      <button class="menu-btn" aria-label="More options">•••</button>
+  <main class="chat-panel">
+    <header class="chat-panel-header">
+      <div><h1>Acme Consulting</h1><p><span class="online-dot"></span> Jonathan • Dial in Consulting</p></div>
     </header>
-    <section class="messages" id="messages" aria-live="polite">
-      <div class="day">Today</div>
-      <div class="message theirs"><div class="bubble"><strong>Jonathan</strong><p>Hi! Welcome to the Dial in Consulting client portal. This is where we can keep project conversations in one place.</p><time>10:14 AM</time></div></div>
-      <div class="message mine"><div class="bubble"><p>Thanks! This looks great.</p><time>10:16 AM</time></div></div>
+    <section class="chat-messages" id="chatMessages" aria-live="polite">
+      <div class="message"><div><div class="message-bubble">Hi! Welcome to the Dial in Consulting client portal. This is where we can keep project conversations in one place.</div><div class="message-meta">Jonathan • Today</div></div></div>
+      <div class="message mine"><div><div class="message-bubble">Thanks! This looks great.</div><div class="message-meta">You • Today</div></div></div>
     </section>
-    <form class="composer" id="chatForm">
+    <form class="chat-composer" id="chatForm">
       <textarea id="messageInput" rows="1" placeholder="Type a message..." aria-label="Message"></textarea>
-      <button type="submit" aria-label="Send message">➤</button>
+      <button class="send-btn" type="submit" aria-label="Send message">➤</button>
     </form>
+    <p class="chat-note">Preview mode: messages are displayed locally in this browser. A secure backend will be connected before customer use.</p>
   </main>
 </div>
 <script src="client-chat.js"></script>
