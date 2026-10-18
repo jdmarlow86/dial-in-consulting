@@ -1,0 +1,107 @@
+name: Submit changed pages to IndexNow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  submit-urls:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Submit changed URLs to IndexNow
+        env:
+          INDEXNOW_KEY: 35f1fbc1ef494f95ad9bda438acc4b22
+          SITE_BASE: https://jdmarlow86.github.io/dial-in-consulting
+          KEY_LOCATION: https://jdmarlow86.github.io/dial-in-consulting/35f1fbc1ef494f95ad9bda438acc4b22.txt
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        run: |
+          python <<'PY'
+          import json
+          import os
+          import subprocess
+          import urllib.error
+          import urllib.request
+
+          base = os.environ["SITE_BASE"].rstrip("/")
+          key = os.environ["INDEXNOW_KEY"]
+          event_name = os.environ["EVENT_NAME"]
+          before = os.environ.get("EVENT_BEFORE", "")
+          sha = os.environ["EVENT_SHA"]
+
+          if event_name == "workflow_dispatch":
+              result = subprocess.run(
+                  ["git", "ls-files", "*.html"],
+                  check=True, capture_output=True, text=True
+              )
+              changed = result.stdout.splitlines()
+          elif before and set(before) != {"0"}:
+              result = subprocess.run(
+                  ["git", "diff", "--name-only", before, sha],
+                  check=True, capture_output=True, text=True
+              )
+              changed = result.stdout.splitlines()
+          else:
+              result = subprocess.run(
+                  ["git", "ls-files"],
+                  check=True, capture_output=True, text=True
+              )
+              changed = result.stdout.splitlines()
+
+          urls = set()
+          for path in changed:
+              path = path.strip().replace("\\", "/")
+              if not path or path.startswith(".github/"):
+                  continue
+              if path == "README.md" or path.lower().endswith((".md", ".txt")):
+                  continue
+              if path.endswith(".html"):
+                  if path == "index.html":
+                      urls.add(base + "/")
+                  else:
+                      urls.add(base + "/" + path)
+              elif path.endswith((".css", ".js", ".json", ".xml", ".webp", ".png", ".jpg", ".jpeg", ".svg", ".ico")):
+                  # Notify the homepage when its assets or sitemap change.
+                  urls.add(base + "/")
+
+          if not urls:
+              print("No website URLs changed; nothing to submit.")
+              raise SystemExit(0)
+
+          payload = {
+              "host": "jdmarlow86.github.io",
+              "key": key,
+              "keyLocation": os.environ["KEY_LOCATION"],
+              "urlList": sorted(urls),
+          }
+          request = urllib.request.Request(
+              "https://api.indexnow.org/indexnow",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={"Content-Type": "application/json; charset=utf-8"},
+              method="POST",
+          )
+          print("Submitting URLs:")
+          for url in payload["urlList"]:
+              print(" - " + url)
+
+          try:
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  print(f"IndexNow response: HTTP {response.status}")
+                  if response.status not in (200, 202):
+                      raise SystemExit(f"Unexpected IndexNow response: {response.status}")
+          except urllib.error.HTTPError as error:
+              body = error.read().decode("utf-8", errors="replace")
+              print(f"IndexNow error: HTTP {error.code}: {body}")
+              raise
+          PY
