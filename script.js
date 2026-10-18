@@ -56,52 +56,51 @@ document.addEventListener('DOMContentLoaded', function() {
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData);
 
-        const emailBody = `
-Contact Form Submission
-
-Name: ${data.name}
-Email: ${data.email}
-Subject: ${data.subject}
-
-Message:
-${data.message}
-
----
-This message was sent via the Dial in Consulting website.
-        `.trim();
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending…';
 
         try {
-            const response = await fetch('https://formspree.io/f/xqapdbpd', {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
+                    access_key: '041ba89b-5d7e-4097-a939-9dd31f8b289c',
+                    name: data.name,
                     email: data.email,
-                    subject: `${data.subject} - From Website Contact Form`,
-                    message: emailBody
+                    subject: `${data.subject} - Dial in Consulting Website`,
+                    message: data.message,
+                    from_name: 'Dial in Consulting Website',
+                    botcheck: data.botcheck || ''
                 })
             });
 
-            if (response.ok) {
-                showModal(
-                    'Message Sent!',
-                    `Thank you, ${data.name}! Your message has been sent successfully. We'll respond to ${data.email} within 24 hours.`
-                );
-                contactForm.reset();
-            } else {
-                throw new Error('Form submission failed');
+            const result = await response.json();
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || 'Form submission failed');
             }
-        } catch (error) {
-            window.location.href = `mailto:dial.in.consulting@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(emailBody)}`;
+
             showModal(
-                'Opening Email Client',
-                'We\'re opening your email client to send your message directly to dial.in.consulting@gmail.com.'
+                'Message Sent!',
+                `Thank you, ${data.name}! Your message has been sent successfully. We'll respond to ${data.email} within 24 hours.`
             );
             contactForm.reset();
+        } catch (error) {
+            showModal(
+                'Message Not Sent',
+                'Sorry, your message could not be sent right now. Please try again in a moment or email dial.in.consulting@gmail.com directly.',
+                true
+            );
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
         }
     });
 
