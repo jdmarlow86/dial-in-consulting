@@ -771,3 +771,115 @@ select:focus-visible {
         animation: none;
     }
 }
+
+
+/* Transparent custom project pricing */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+.pricing-card,
+.custom-pricing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+}
+.pricing-card {
+    display: flex;
+    flex-direction: column;
+}
+.pricing-card-featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-light);
+}
+.pricing-label {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+.pricing-card h3 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin: 12px 0;
+}
+.pricing-card h3 span {
+    color: var(--accent);
+}
+.pricing-card p,
+.custom-pricing-card p {
+    color: var(--text-secondary);
+}
+.pricing-card ul,
+.pricing-notes ul {
+    list-style: none;
+    margin-top: 20px;
+}
+.pricing-card li,
+.pricing-notes li {
+    color: var(--text-secondary);
+    margin: 10px 0;
+    padding-left: 24px;
+    position: relative;
+}
+.pricing-card li::before,
+.pricing-notes li::before {
+    content: "✓";
+    color: var(--success);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+}
+.pricing-notes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin-top: 28px;
+    padding: 30px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+.pricing-notes h3 {
+    font-size: 1.25rem;
+}
+.pricing-notes ul {
+    margin-top: 10px;
+}
+.custom-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+.custom-pricing-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+}
+.custom-pricing-callout {
+    margin-top: 24px;
+    padding: 28px 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+.custom-pricing-callout p {
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+}
+@media (max-width: 900px) {
+    .pricing-grid,
+    .custom-pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    .pricing-notes {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .pricing-notes .btn {
+        width: 100%;
+    }
+}
